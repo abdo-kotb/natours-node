@@ -7,7 +7,7 @@ exports.getAll = (Modal) =>
     // To allow for nested GET reviews on tour
     let filter = {};
     if (req.params.tourId) filter = { tour: req.params.tourId };
-    console.log(req.params.tourId);
+    // console.log(req.params.tourId);
 
     const features = new APIFeatures(req.query);
     const { skip, limit } = features.pagination();
