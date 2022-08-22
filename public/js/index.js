@@ -10,35 +10,44 @@ const userDataForm = document.querySelector('.form--user-data');
 const userPasswordForm = document.querySelector('.form-user-password');
 const bookBtn = document.getElementById('book-tour');
 
-loginForm?.addEventListener('submit', (e) => {
-  e.preventDefault();
-  const email = document.getElementById('email').value;
-  const password = document.getElementById('password').value;
-  login(email, password);
-});
-logoutBtn?.addEventListener('click', logout);
+if (loginForm) {
+  loginForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    login(email, password);
+  });
+}
 
-userDataForm?.addEventListener('submit', (e) => {
-  e.preventDefault();
+if (logoutBtn) logoutBtn.addEventListener('click', logout);
 
-  const form = new FormData();
-  form.append('name', document.getElementById('name').value);
-  form.append('email', document.getElementById('email').value);
-  form.append('photo', document.getElementById('photo').files[0]);
+if (userDataForm) {
+  userDataForm.addEventListener('submit', (e) => {
+    e.preventDefault();
 
-  updateSettings(form, 'data');
-});
+    const form = new FormData();
+    form.append('name', document.getElementById('name').value);
+    form.append('email', document.getElementById('email').value);
+    form.append('photo', document.getElementById('photo').files[0]);
 
-userPasswordForm?.addEventListener('submit', (e) => {
-  e.preventDefault();
-  const passwordCurrent = document.getElementById('password-current').value;
-  const password = document.getElementById('password').value;
-  const passwordConfirm = document.getElementById('password-confirm').value;
-  updateSettings({ passwordCurrent, password, passwordConfirm }, 'password');
-});
+    updateSettings(form, 'data');
+  });
+}
 
-bookBtn?.addEventListener('click', (e) => {
-  e.target.textContent = 'Processing...';
-  const { tourId } = e.target.dataset;
-  bookTour(tourId);
-});
+if (userPasswordForm) {
+  userPasswordForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const passwordCurrent = document.getElementById('password-current').value;
+    const password = document.getElementById('password').value;
+    const passwordConfirm = document.getElementById('password-confirm').value;
+    updateSettings({ passwordCurrent, password, passwordConfirm }, 'password');
+  });
+}
+
+if (bookBtn) {
+  bookBtn.addEventListener('click', (e) => {
+    e.target.textContent = 'Processing...';
+    const { tourId } = e.target.dataset;
+    bookTour(tourId);
+  });
+}
